@@ -163,7 +163,6 @@ jobs:
             npm audit fix --audit-level=critical --force
             npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
-            npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
@@ -249,7 +248,7 @@ jobs:
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-            
+
       - destroy-environment 
       - revert-migrations
 
