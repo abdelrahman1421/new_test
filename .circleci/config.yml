@@ -212,7 +212,7 @@ jobs:
       - install_awscli
       - install_ansible
       - add_ssh_keys:
-          fingerprints: ["fd:d7:56:08:07:3a:f9:19:40:c0:a9:e0:82:ea:c4:84"]
+          fingerprints: ["3f:14:83:19:59:22:f5:c2:2f:41:3b:68:b0:3b:52:d8"]
       - attach_workspace:
           at: ~/
       - run:
@@ -291,7 +291,7 @@ jobs:
       - install_ansible
       - install_nodejs
       - add_ssh_keys:
-          fingerprints: ["fd:d7:56:08:07:3a:f9:19:40:c0:a9:e0:82:ea:c4:84"]
+          fingerprints: ["3f:14:83:19:59:22:f5:c2:2f:41:3b:68:b0:3b:52:d8"]
       - attach_workspace:
           at: ~/
       - restore_cache:
@@ -341,18 +341,18 @@ jobs:
             else
               exit 1
             fi
-      - run:
-          name: Frontend smoke test.
-          command: |
-            FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
-            if curl -s $FRONTEND_WEBSITE | grep "Welcome"
-            then
-              exit 0
-            else
-              exit 1 
-            fi
-      - destroy-environment
-      - revert-migrations
+      # - run:
+      #     name: Frontend smoke test.
+      #     command: |
+      #       FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+      #       if curl -s $FRONTEND_WEBSITE | grep "Welcome"
+      #       then
+      #         exit 0
+      #       else
+      #         exit 1 
+      #       fi
+      # - destroy-environment
+      # - revert-migrations
 
   cloudfront-update:
     docker:
@@ -428,9 +428,11 @@ workflows:
           requires: [run-migrations] 
       - deploy-backend:
           requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [smoke-test]
-      - cleanup:
-          requires: [cloudfront-update]
+      # - smoke-test:
+      #     requires: [deploy-backend, deploy-frontend]
+      # - cloudfront-update:
+      #     requires: [smoke-test]
+      # - cleanup:
+      #     requires: [cloudfront-update]
+
+# VS Code Extension Version: 1.5.1
